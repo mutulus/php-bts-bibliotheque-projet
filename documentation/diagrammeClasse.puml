@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+Class Adherent{
+    -numeroAdherent : int
+    -prenomAdherent : string
+    -nomAdherent : string
+    -emailAdherent : string
+    -dateAdhesion : Date
+
+}
+Abstract Class Media{
+    #titre : string
+    #dureeEmpruntMax
+}
+Class BlueRay{
+    -realisateur : string
+    -duree minutes : int
+    -anneeSortie:int
+    -statut:bool
+    -dateCreation:date
+
+
+}
+
+Class Livre{
+    -isbn : string
+    -auteur:string
+    -nbPages:int
+    -statut:bool
+    -dateCreation:date
+
+}
+
+Class Magazine{
+    -numero : int
+    -datePublication : Date
+    -statut:bool
+    -dateCreation:date
+
+}
+
+Class Emprunt{
+    -dateEmprunt : Date
+    -dateRetourEstimee: Date
+    -dateRetour: Date
+
+}
+Media <|-- Livre
+Media <|-- BlueRay
+Media <|-- Magazine
+
+Emprunt  --> "1..1" Media : Un media est emprunté
+Emprunt --> "1..1" Adherent : Un emprunt est réalisé par un adhérent
+
+
+@enduml
