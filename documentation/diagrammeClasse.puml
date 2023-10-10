@@ -10,33 +10,31 @@ Class Adherent{
 }
 Abstract Class Media{
     #titre : string
-    #dureeEmpruntMax
+    #statut:string
+    #dateCreation:date
+
 }
 Class BlueRay{
     -realisateur : string
     -duree minutes : int
     -anneeSortie:int
-    -statut:bool
-    -dateCreation:date
-
-
+    -dateLimite : const
 }
 
 Class Livre{
     -isbn : string
     -auteur:string
     -nbPages:int
-    -statut:bool
-    -dateCreation:date
+    -dateLimite : const
+
+
 
 }
 
 Class Magazine{
     -numero : int
     -datePublication : Date
-    -statut:bool
-    -dateCreation:date
-
+    -dateLimite : const
 }
 
 Class Emprunt{
