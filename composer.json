@@ -1,0 +1,16 @@
+{
+    "name": "mednisa/php-projet-bibliotheque",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arturs Mednis",
+            "email": "artursmednis2003@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "require": {}
+}
