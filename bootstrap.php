@@ -4,7 +4,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
-require_once "vendor/autoload.php";
+require "vendor/autoload.php";
 
 // Création de la configuration de Doctrine
 // On lui passe le dossier de base des entités
