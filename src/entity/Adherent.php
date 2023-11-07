@@ -27,13 +27,6 @@ class Adherent
 
     public function __construct()
     {
-        $this->genererNumero();
-    }
-
-    private function genererNumero():void{
-        $structure="AD-";
-        $numero=rand(100000,999999);
-        $this->numeroAdherent=$structure.$numero;
     }
 
     public function getNumeroAdherent(): string

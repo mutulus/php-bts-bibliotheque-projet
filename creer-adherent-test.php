@@ -3,10 +3,10 @@
 require "bootstrap.php";
 
 $adherent=new \App\entity\Adherent();
-$adherent->setMailAdherent("arturs@gmail.com");
-$adherent->setNomAdherent("Michel");
-$adherent->setPrenomAdherent("Tom");
-$adherent->setDateAdhesion("17/10/2023");
+$adherent->setMailAdherent("artusdrs@gmail.com");
+$adherent->setNomAdherent("Micheld");
+$adherent->setPrenomAdherent("Tomd");
+$adherent->setDateAdhesion("15/09/2023");
 
 
 $entityManager->persist($adherent);
