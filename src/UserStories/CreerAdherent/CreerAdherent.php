@@ -27,13 +27,14 @@ class CreerAdherent
      * @param ValidatorInterface $validateur
      * @param Validateur $validateurBDD
      */
-    public function __construct(EntityManagerInterface $entityManager, GenerateurNumeroAdherent $generateurNumeroAdherent, ValidatorInterface $validateur, Validateur $validateurBDD)
+    public function __construct(EntityManagerInterface $entityManager, ?GenerateurNumeroAdherent $generateurNumeroAdherent, ValidatorInterface $validateur, Validateur $validateurBDD)
     {
         $this->entityManager = $entityManager;
         $this->generateurNumeroAdherent = $generateurNumeroAdherent;
         $this->validateur = $validateur;
         $this->validateurBDD = $validateurBDD;
     }
+
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -43,7 +44,6 @@ class CreerAdherent
      */
 
 
-
     public function execute(CreerAdherentRequete $requete): bool|array
     {
 
@@ -51,28 +51,26 @@ class CreerAdherent
         $violations = $this->validateur->validate($requete);
         if (count($violations) == 0) {
             // Vérifier que l'email n'existe pas déjà
-            try {
-                $this->validateurBDD->mailDispo($requete,$this->entityManager);
-            }catch (\Exception $e){
-                echo $e->getMessage();
-            }
+
+            $this->validateurBDD->mailDispo($requete,$this->entityManager);
             // Générer un numéro d'adhérent au format AD-999999
             $numeroAdherent = $this->generateurNumeroAdherent->generer();
 
-            // Vérifier que le numéro n'existe pas déjà
+                // Vérifier que le numéro n'existe pas déjà
+                $this->validateurBDD->numAdherentUtilise($numeroAdherent,$this->entityManager);
+                // Créer l'adhérent
+                $adherent = new Adherent();
+                $adherent->setNumeroAdherent($numeroAdherent);
+                $adherent->setNomAdherent($requete->nom);
+                $adherent->setPrenomAdherent($requete->prenom);
+                $adherent->setMailAdherent($requete->email);
+                $date = new \DateTime();
+                $adherent->setDateAdhesion($date->format("d/m/Y"));
+                // Enregistrer l'adhérent en base de données
+                $this->entityManager->persist($adherent);
+                $this->entityManager->flush();
+                return true;
 
-            // Créer l'adhérent
-            $adherent = new Adherent();
-            $adherent->setNumeroAdherent($numeroAdherent);
-            $adherent->setNomAdherent($requete->nom);
-            $adherent->setPrenomAdherent($requete->prenom);
-            $adherent->setMailAdherent($requete->email);
-            $date = new \DateTime();
-            $adherent->setDateAdhesion($date->format("d/m/Y"));
-            // Enregistrer l'adhérent en base de données
-            $this->entityManager->persist($adherent);
-            $this->entityManager->flush();
-            return true;
         }
         $errors=[];
         foreach ($violations as $violation){
@@ -80,4 +78,5 @@ class CreerAdherent
         }
         return $errors;
     }
+
 }

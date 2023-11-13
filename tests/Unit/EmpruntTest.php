@@ -1,6 +1,6 @@
 <?php
 
-namespace App\tests\Unit;
+namespace Tests\Unit\EmpruntTest;
 
 use App\entity\Emprunt;
 use PHPUnit\Framework\Attributes\Test;
