@@ -83,7 +83,7 @@ class CreerAdherentTest extends TestCase
 
     }
     #[test]
-    public function creerAdherent_mailIncorrect_Exception(){
+    public function creerAdherent_mailDejaUtilise_Exception(){
         $requete=new CreerAdherentRequete("Arturs","Mednis","artursmednis2003@gmail.com");
         $ceerAdherent=new CreerAdherent($this->entityManager,$this->generateurNumeroAdherent,$this->validator,$this->validateurBDD);
 

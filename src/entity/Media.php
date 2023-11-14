@@ -2,9 +2,26 @@
 
 namespace App\entity;
 
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\InheritanceType;
+
+#[entity]
+#[InheritanceType("JOINED")]
+#[DiscriminatorColumn(name: "type",type: "string")]
+#[DiscriminatorMap(["livre"=>"Livre","magazine"=>"Magazine","BlueRay"=>"BlueRay"])]
 abstract class Media
 {
+    #[id]
+    #[GeneratedValue]
+    #[Column(type: "integer")]
     protected int $id;
+    #[Column(type: st)]
     protected string $titre;
     protected string $statut;
     protected \DateTime $dateCreation;
