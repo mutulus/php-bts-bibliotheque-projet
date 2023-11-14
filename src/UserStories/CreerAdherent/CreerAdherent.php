@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use function PHPUnit\Framework\throwException;
 
 class CreerAdherent
 {
@@ -72,11 +73,12 @@ class CreerAdherent
                 return true;
 
         }
-        $errors=[];
+        throw new \Exception("Le ou les champs ne son pas complets");
+        /*$errors=[];
         foreach ($violations as $violation){
             $errors[]=$violation->getMessage();
         }
         return $errors;
-    }
+    }*/
 
-}
+}}

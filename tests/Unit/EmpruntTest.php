@@ -57,7 +57,7 @@ class EmpruntTest extends TestCase
         $this->assertTrue($resultat);
     }
     #[test]
-    public function testEmprunt_NonRetardCarDateRetourNorml_false()
+    public function testEmprunt_NonRetardCarDateRetourNormal_false()
     {
         $emprunt = new Emprunt();
         $emprunt->setDateEmprunt("15/10/2023");
