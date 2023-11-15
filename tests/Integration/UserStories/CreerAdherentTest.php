@@ -69,18 +69,16 @@ class CreerAdherentTest extends TestCase
         $this->assertEquals("Mednis",$adherent->getNomAdherent());
     }
     #[test]
-    public function creerAdherent_ValeursIncorrectesVide_Null()
+    public function creerAdherent_ValeursIncorrectesVide_Exception()
     {
         // Arrange
         $requete = new CreerAdherentRequete("Arturs", "", 'artursmednis@gmail.com');
         $creerAdherent = new CreerAdherent($this->entityManager, $this->generateurNumeroAdherent, $this->validator,$this->validateurBDD);
         // Act
-        $resultat = $creerAdherent->execute($requete);
-        // Assert
-        $repository = $this->entityManager->getRepository(Adherent::class);
-        $adherent = $repository->findOneBy(['mailAdherent' => "artursmednis@gmail.com"]);
-        $this->assertNull($adherent);
 
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le ou les champs ne sont pas complets");
+        $resultat = $creerAdherent->execute($requete);
     }
     #[test]
     public function creerAdherent_mailDejaUtilise_Exception(){
