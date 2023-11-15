@@ -21,10 +21,14 @@ abstract class Media
     #[GeneratedValue]
     #[Column(type: "integer")]
     protected int $id;
-    #[Column(type: st)]
+    #[Column(type: "string")]
     protected string $titre;
-    protected string $statut;
+    #[Column(type: "string")]
+    protected int $idStatut;
+     #[Column(type: "datetime")]
     protected \DateTime $dateCreation;
+     #[Column(type: "integer")]
+    protected int $dureeEmprunt;
 
     public function __construct()
     {
@@ -45,14 +49,14 @@ abstract class Media
         $this->titre = $titre;
     }
 
-    public function getStatut(): string
+    public function getIdStatut(): int
     {
-        return $this->statut;
+        return $this->idStatut;
     }
 
-    public function setStatut(string $statut): void
+    public function setIdStatut(int $statut): void
     {
-        $this->statut = $statut;
+        $this->idStatut = $statut;
     }
 
     public function getDateCreation(): \DateTime
@@ -63,6 +67,16 @@ abstract class Media
     public function setDateCreation(\DateTime $dateCreation): void
     {
         $this->dateCreation = $dateCreation;
+    }
+
+    public function getDureeEmprunt(): int
+    {
+        return $this->dureeEmprunt;
+    }
+
+    public function setDureeEmprunt(int $dureeEmprunt): void
+    {
+        $this->dureeEmprunt = $dureeEmprunt;
     }
 
 }

@@ -6,7 +6,6 @@ class Magazine extends Media
 {
     private int $numero;
     private \DateTime $datePublication;
-    private int $dateLimite;
 
     public function __construct()
     {
@@ -33,15 +32,6 @@ class Magazine extends Media
         $this->datePublication = $datePublication;
     }
 
-    public function getDateLimite(): int
-    {
-        return $this->dateLimite;
-    }
-
-    public function setDateLimite(int $dateLimite): void
-    {
-        $this->dateLimite = $dateLimite;
-    }
 
 
 }
