@@ -1,10 +1,15 @@
 <?php
 
 namespace App\entity;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
 
+#[Entity]
 class Magazine extends Media
 {
+    #[Column (type: "integer")]
     private int $numero;
+    #[Column(type: "datetime")]
     private \DateTime $datePublication;
 
     public function __construct()
