@@ -73,12 +73,12 @@ class CreerAdherent
                 return true;
 
         }
-        throw new \Exception("Le ou les champs ne son pas complets");
+        throw new \Exception("Le ou les champs ne sont pas complets");
         /*$errors=[];
         foreach ($violations as $violation){
             $errors[]=$violation->getMessage();
         }
         return $errors;
-    }*/
+    }    */
 
 }}
