@@ -3,8 +3,10 @@
 namespace App\Validateurs;
 
 use App\entity\Adherent;
+use App\entity\Livre;
 use App\UserStories\CreerAdherent\CreerAdherent;
 use App\UserStories\CreerAdherent\CreerAdherentRequete;
+use App\UserStories\CreerLivre\CreerLivreRequete;
 use Doctrine\ORM\EntityManager;
 use function PHPUnit\Framework\throwException;
 
@@ -26,6 +28,14 @@ class Validateur
         }
         return false;
 
+    }
+
+    public function isbnUtilise(CreerLivreRequete $livre,EntityManager $entityManager):bool{
+        $repository=$entityManager->getRepository(Livre::class);
+        if ($repository->findOneBy(['isbn'=>$livre->isbn])){
+            throw new \Exception("Cet isbn est déjà utilisé");
+        }
+        return false;
     }
 
 }

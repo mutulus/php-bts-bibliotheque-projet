@@ -23,7 +23,7 @@ abstract class Media
     protected int $id;
     #[Column(type: "string")]
     protected string $titre;
-    #[Column(type: "string")]
+    #[Column(type: "integer")]
     protected int $idStatut;
      #[Column(type: "datetime")]
     protected \DateTime $dateCreation;

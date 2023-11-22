@@ -1,12 +1,19 @@
 <?php
 
 namespace App\entity;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
 
+#[Entity]
 class BlueRay extends Media
 {
+    #[Column(type: "string")]
     private string $realisateur;
+    #[Column(type: "integer")]
     private int $dureeMin;
+    #[Column(type: "integer")]
     private int $anneeSortie;
+    #[Column (type: "integer")]
     private int $dateLimite;
 
     public function __construct()

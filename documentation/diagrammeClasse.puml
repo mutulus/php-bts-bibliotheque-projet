@@ -25,6 +25,7 @@ Class Livre{
     -isbn : string
     -auteur:string
     -nbPages:int
+    -dateParution:Date
 
 
 

@@ -14,6 +14,13 @@ private string $isbn;
 private string $auteur;
 #[Column(type: "integer")]
 private int $nbPages;
+#[Column(type: "datetime")]
+private \DateTime $dateParution;
+
+const Disponible= "Disponible";
+const Emprunte= "Emprunte";
+const Disponible= "Disponible";
+const Disponible= "Disponible";
 
 
 
@@ -52,6 +59,18 @@ public function __construct()
     {
         $this->nbPages = $nbPages;
     }
+
+    public function getDateParution(): \DateTime
+    {
+        return $this->dateParution;
+    }
+
+    public function setDateParution(string $dateParution): void
+    {
+        $date=\DateTime::createFromFormat('d/m/Y',$dateParution);
+        $this->dateParution = $date;
+    }
+
 
 
 }
