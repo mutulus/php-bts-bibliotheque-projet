@@ -3,9 +3,14 @@
 namespace App\Validateurs;
 
 use App\entity\Adherent;
+use App\entity\Livre;
+use App\entity\Magazine;
 use App\UserStories\CreerAdherent\CreerAdherent;
 use App\UserStories\CreerAdherent\CreerAdherentRequete;
+use App\UserStories\CreerLivre\CreerLivreRequete;
+use App\UserStories\CreerMagazine\CreerMagazineRequete;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use function PHPUnit\Framework\throwException;
 
 class Validateur
@@ -26,6 +31,21 @@ class Validateur
         }
         return false;
 
+    }
+
+    public function isbnUtilise(CreerLivreRequete $livre,EntityManager $entityManager):bool{
+        $repository=$entityManager->getRepository(Livre::class);
+        if ($repository->findOneBy(['isbn'=>$livre->isbn])){
+            throw new \Exception("Cet isbn est déjà utilisé");
+        }
+        return false;
+    }
+    public function numeroMagazineUtilise(CreerMagazineRequete $magazine,EntityManager $entityManager):bool{
+        $repository=$entityManager->getRepository(Magazine::class);
+        if ($repository->findOneBy(['numero'=>$magazine->numero])){
+            throw new \Exception("Ce numero est deja utilise");
+        }
+        return false;
     }
 
 }

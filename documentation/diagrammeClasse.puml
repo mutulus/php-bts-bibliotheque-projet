@@ -12,20 +12,21 @@ Abstract Class Media{
     #titre : string
     #statut:string
     #dateCreation:date
-
+    #dureeEmprunt : int
 }
 Class BlueRay{
     -realisateur : string
     -duree minutes : int
     -anneeSortie:int
-    -dateLimite : const
+
 }
 
 Class Livre{
     -isbn : string
     -auteur:string
     -nbPages:int
-    -dateLimite : const
+    -dateParution:Date
+
 
 
 
@@ -34,7 +35,7 @@ Class Livre{
 Class Magazine{
     -numero : int
     -datePublication : Date
-    -dateLimite : const
+
 }
 
 Class Emprunt{

@@ -1,12 +1,16 @@
 <?php
 
 namespace App\entity;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
 
+#[Entity]
 class Magazine extends Media
 {
+    #[Column (type: "integer")]
     private int $numero;
+    #[Column(type: "datetime")]
     private \DateTime $datePublication;
-    private int $dateLimite;
 
     public function __construct()
     {
@@ -23,25 +27,17 @@ class Magazine extends Media
         $this->numero = $numero;
     }
 
-    public function getDatePublication(): \DateTime
+    public function getDatePublication(): string
     {
         return $this->datePublication;
     }
 
-    public function setDatePublication(\DateTime $datePublication): void
+    public function setDatePublication(string $datePublication): void
     {
-        $this->datePublication = $datePublication;
+        $date=\DateTime::createFromFormat("d/m/Y",$datePublication);
+        $this->datePublication = $date;
     }
 
-    public function getDateLimite(): int
-    {
-        return $this->dateLimite;
-    }
-
-    public function setDateLimite(int $dateLimite): void
-    {
-        $this->dateLimite = $dateLimite;
-    }
 
 
 }

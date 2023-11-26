@@ -2,13 +2,24 @@
 
 namespace App\entity;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+
+#[Entity]
 class Livre extends Media
 {
+#[Column(type: "string")]
 private string $isbn;
+#[Column(type: "string")]
 private string $auteur;
+#[Column(type: "integer")]
 private int $nbPages;
+#[Column(type: "datetime")]
+private \DateTime $dateParution;
 
-private int $dateLimite;
+
+
+
 
 
 public function __construct()
@@ -46,14 +57,17 @@ public function __construct()
         $this->nbPages = $nbPages;
     }
 
-    public function getDateLimite(): int
+    public function getDateParution(): \DateTime
     {
-        return $this->dateLimite;
+        return $this->dateParution;
     }
 
-    public function setDateLimite(int $dateLimite): void
+    public function setDateParution(string $dateParution): void
     {
-        $this->dateLimite = $dateLimite;
+        $date=\DateTime::createFromFormat('d/m/Y',$dateParution);
+        $this->dateParution = $date;
     }
+
+
 
 }

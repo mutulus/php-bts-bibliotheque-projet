@@ -65,25 +65,47 @@ class CreerAdherentTest extends TestCase
         $repository=$this->entityManager->getRepository(Adherent::class);
         $adherent=$repository->findOneBy(['mailAdherent'=>"artursmednis@gmail.com"]);
         $this->assertNotNull($adherent);
-        $this->assertEquals("Arturs",$adherent->getPrenomAdherent());
-        $this->assertEquals("Mednis",$adherent->getNomAdherent());
+        $this->assertEquals("Arturs",$requete->prenom);
+        $this->assertEquals("Mednis",$requete->nom);
     }
     #[test]
-    public function creerAdherent_ValeursIncorrectesVide_Null()
+    public function creerAdherent_NomVide_Exception()
     {
         // Arrange
         $requete = new CreerAdherentRequete("Arturs", "", 'artursmednis@gmail.com');
         $creerAdherent = new CreerAdherent($this->entityManager, $this->generateurNumeroAdherent, $this->validator,$this->validateurBDD);
         // Act
-        $resultat = $creerAdherent->execute($requete);
-        // Assert
-        $repository = $this->entityManager->getRepository(Adherent::class);
-        $adherent = $repository->findOneBy(['mailAdherent' => "artursmednis@gmail.com"]);
-        $this->assertNull($adherent);
 
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le nom est obligatoire");
+        $resultat = $creerAdherent->execute($requete);
+    }
+    #[Test]
+    public function creerAdherent_PrenomVide_Exception()
+    {
+        // Arrange
+        $requete = new CreerAdherentRequete("", "Mednis", 'artursmednis@gmail.com');
+        $creerAdherent = new CreerAdherent($this->entityManager, $this->generateurNumeroAdherent, $this->validator,$this->validateurBDD);
+        // Act
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le prénom est obligatoire");
+        $resultat = $creerAdherent->execute($requete);
+    }
+    #[Test]
+    public function creerAdherent_MailVide_Exception()
+    {
+        // Arrange
+        $requete = new CreerAdherentRequete("Arturs", "Mednis", '');
+        $creerAdherent = new CreerAdherent($this->entityManager, $this->generateurNumeroAdherent, $this->validator,$this->validateurBDD);
+        // Act
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le mail est obligatoire");
+        $resultat = $creerAdherent->execute($requete);
     }
     #[test]
-    public function creerAdherent_mailIncorrect_Exception(){
+    public function creerAdherent_mailDejaUtilise_Exception(){
         $requete=new CreerAdherentRequete("Arturs","Mednis","artursmednis2003@gmail.com");
         $ceerAdherent=new CreerAdherent($this->entityManager,$this->generateurNumeroAdherent,$this->validator,$this->validateurBDD);
 

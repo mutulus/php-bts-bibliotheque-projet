@@ -2,12 +2,41 @@
 
 namespace App\entity;
 
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints\NotNull;
+
+#[entity]
+#[InheritanceType("JOINED")]
+#[DiscriminatorColumn(name: "type",type: "string")]
+#[DiscriminatorMap(["livre"=>"Livre","magazine"=>"Magazine","BlueRay"=>"BlueRay"])]
 abstract class Media
 {
+    public const DISPONIBLE="Disponible";
+    public const EMPRUNTE="Emprunte";
+    public const NON_DISPONIBLE="Non disponible";
+    public const NOUVEAU ="Nouveau";
+    #[id]
+    #[GeneratedValue]
+    #[Column(type: "integer")]
     protected int $id;
+    #[Column(type: "string")]
     protected string $titre;
+    #[Column(type: "string")]
     protected string $statut;
+     #[Column(type: "datetime")]
     protected \DateTime $dateCreation;
+     #[Column(type: "integer")]
+    protected int $dureeEmprunt;
+
 
     public function __construct()
     {
@@ -35,7 +64,8 @@ abstract class Media
 
     public function setStatut(string $statut): void
     {
-        $this->statut = $statut;
+
+        $this->statut=$statut;
     }
 
     public function getDateCreation(): \DateTime
@@ -45,7 +75,18 @@ abstract class Media
 
     public function setDateCreation(\DateTime $dateCreation): void
     {
+
         $this->dateCreation = $dateCreation;
+    }
+
+    public function getDureeEmprunt(): int
+    {
+        return $this->dureeEmprunt;
+    }
+
+    public function setDureeEmprunt(int $dureeEmprunt): void
+    {
+        $this->dureeEmprunt = $dureeEmprunt;
     }
 
 }

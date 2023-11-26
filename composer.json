@@ -31,9 +31,9 @@
         "phpunit/phpunit": "^10.4"
     },
     "scripts": {
-        "unit-test": "./vendor/bin/phpunit --testsuite Unit --testdox --colors=always",
-        "it-test": "./vendor/bin/phpunit --testsuite Integration --testdox --colors=always",
-        "all-tests": "./vendor/bin/phpunit --testdox --colors=always"
+        "unit-test": "./vendor/bin/phpunit tests/Unit --testdox --color=always",
+        "it-test": "./vendor/bin/phpunit tests/Integration --testdox --color=always",
+        "all-tests": "./vendor/bin/phpunit tests --testdox --color=always"
     }
 
 
