@@ -3,8 +3,11 @@
 namespace App\UserStories\CreerLivre;
 
 use App\entity\Livre;
+use App\entity\Media;
+use App\entity\Statut;
 use App\Validateurs\Validateur;
 use Doctrine\ORM\EntityManagerInterface;
+use foo\bar;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CreerLivre
@@ -37,8 +40,9 @@ class CreerLivre
             $livre->setTitre($requete->titre);
             $livre->setIsbn($requete->isbn);
             $livre->setDateParution($requete->dateParution);
-
             $livre->setNbPages($requete->nbPages);
+            $repoStatut=$this->entityManager->getRepository(Statut::class);
+            $livre->setStatut(Media::NOUVEAU);
             $date=new \DateTime();
             $livre->setDateCreation($date);
             $livre->setDureeEmprunt(21);
@@ -48,7 +52,13 @@ class CreerLivre
             return true;
 
         }
-    throw new \Exception("Un ou plusieurs champs sont invalides");
+        $errors=[];
+        foreach ($violations as $violation){
+            $errors[]=$violation->getMessage();
+        }
+            throw new \Exception($errors[0]);
+
+
     }
 
 

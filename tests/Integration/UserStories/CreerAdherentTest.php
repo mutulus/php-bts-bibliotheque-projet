@@ -69,7 +69,7 @@ class CreerAdherentTest extends TestCase
         $this->assertEquals("Mednis",$requete->nom);
     }
     #[test]
-    public function creerAdherent_ValeursIncorrectesVide_Exception()
+    public function creerAdherent_NomVide_Exception()
     {
         // Arrange
         $requete = new CreerAdherentRequete("Arturs", "", 'artursmednis@gmail.com');
@@ -77,7 +77,31 @@ class CreerAdherentTest extends TestCase
         // Act
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("Le ou les champs ne sont pas complets");
+        $this->expectExceptionMessage("Le nom est obligatoire");
+        $resultat = $creerAdherent->execute($requete);
+    }
+    #[Test]
+    public function creerAdherent_PrenomVide_Exception()
+    {
+        // Arrange
+        $requete = new CreerAdherentRequete("", "Mednis", 'artursmednis@gmail.com');
+        $creerAdherent = new CreerAdherent($this->entityManager, $this->generateurNumeroAdherent, $this->validator,$this->validateurBDD);
+        // Act
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le prénom est obligatoire");
+        $resultat = $creerAdherent->execute($requete);
+    }
+    #[Test]
+    public function creerAdherent_MailVide_Exception()
+    {
+        // Arrange
+        $requete = new CreerAdherentRequete("Arturs", "Mednis", '');
+        $creerAdherent = new CreerAdherent($this->entityManager, $this->generateurNumeroAdherent, $this->validator,$this->validateurBDD);
+        // Act
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le mail est obligatoire");
         $resultat = $creerAdherent->execute($requete);
     }
     #[test]

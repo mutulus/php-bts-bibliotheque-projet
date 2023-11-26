@@ -3,6 +3,7 @@
 namespace App\UserStories\CreerMagazine;
 
 use App\entity\Magazine;
+use App\entity\Media;
 use App\Validateurs\Validateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -36,13 +37,18 @@ class CreerMagazine
             $magazine->setDatePublication("01/12/2023");
             $magazine->setDateCreation(new \DateTime());
             $magazine->setDureeEmprunt(10);
+            $magazine->setStatut(Media::NOUVEAU);
             // Persister en BDD
             $this->entityManager->persist($magazine);
             $this->entityManager->flush();
             return true;
 
         }
-        throw new \Exception('Un ou plusieurs champs sont invalides');
+        $errors=[];
+        foreach ($violations as $violation){
+            $errors[]=$violation->getMessage();
+        }
+        throw new \Exception($errors[0]);
     }
 
 

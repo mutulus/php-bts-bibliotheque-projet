@@ -61,14 +61,15 @@ class CreerMagazineTest extends TestCase
         $this->assertEquals("Vogue",$magazineRequete->titre);
     }
     #[Test]
-    public function creerMagazine_ValeursIncorrects_Exception(){
+    public function creerMagazine_TitreVide_Exception(){
         $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("",14567);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le titre est obligatoire");
         $Creermagazine->execute($magazineRequete);
     }
     #[Test]
-    public function creerLivre_NumeroDejaUtilise_Exception(){
+    public function creerMagazine_NumeroDejaUtilise_Exception(){
         $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
         $magazineRequete2=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);

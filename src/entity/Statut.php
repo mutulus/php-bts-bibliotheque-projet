@@ -12,6 +12,7 @@ class Statut
     #[Column(type: "integer")]
     private int $id;
     #[Column(type: "string",length: 15)]
+
     private string $statut;
 
     public function getId(): int

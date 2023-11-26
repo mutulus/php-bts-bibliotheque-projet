@@ -63,11 +63,32 @@ class CreerLivreTest extends TestCase
         $this->assertEquals("Spider-man",$requete->titre);
     }
     #[Test]
-    public function creerLivre_valeursIncorrectesVide_Exception(){
+    public function creerLivre_AuteurVide_Exception(){
         $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","",456,'12/05/2023');
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
 
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("L'auteur est obligatoire");
+        $creerLivre->execute($requete);
+
+    }
+    #[Test]
+    public function creerLivre_TitreVide_Exception(){
+        $requete=new CreerLivreRequete("","148-DFDZSS","Stan Lee",456,'12/05/2023');
+        $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le titre est obligatoire");
+        $creerLivre->execute($requete);
+
+    }
+    #[Test]
+    public function creerLivre_nbPagesVide_Exception(){
+        $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan Lee",0,'12/05/2023');
+        $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Le nombre de pages doit être positif");
         $creerLivre->execute($requete);
 
     }

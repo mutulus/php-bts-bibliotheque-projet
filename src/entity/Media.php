@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[entity]
 #[InheritanceType("JOINED")]
@@ -19,24 +20,24 @@ use Doctrine\ORM\Mapping\ManyToOne;
 #[DiscriminatorMap(["livre"=>"Livre","magazine"=>"Magazine","BlueRay"=>"BlueRay"])]
 abstract class Media
 {
+    public const DISPONIBLE="Disponible";
+    public const EMPRUNTE="Emprunte";
+    public const NON_DISPONIBLE="Non disponible";
+    public const NOUVEAU ="Nouveau";
     #[id]
     #[GeneratedValue]
     #[Column(type: "integer")]
     protected int $id;
     #[Column(type: "string")]
     protected string $titre;
-
-    #[Column(type: "integer")]
-    protected int $idStatut=3;
+    #[Column(type: "string")]
+    protected string $statut;
      #[Column(type: "datetime")]
     protected \DateTime $dateCreation;
      #[Column(type: "integer")]
     protected int $dureeEmprunt;
-   /* const Disponible= "Disponible";
-    const Emprunte= "Emprunte";
-    const Nouveau= "Nouveau";
-    const Non_disponible= "Non disponible";
-*/
+
+
     public function __construct()
     {
     }
@@ -56,14 +57,15 @@ abstract class Media
         $this->titre = $titre;
     }
 
-    public function getIdStatut(): int
+    public function getStatut(): string
     {
-        return $this->idStatut->getStatut();
+        return $this->statut;
     }
 
-    public function setIdStatut(int $statut): void
+    public function setStatut(string $statut): void
     {
-        $this->idStatut=$statut ;
+
+        $this->statut=$statut;
     }
 
     public function getDateCreation(): \DateTime
