@@ -23,11 +23,17 @@
         "vlucas/phpdotenv": "^5.5",
         "doctrine/dbal": "^3.2",
         "symfony/yaml": "^5.4",
-        "symfony/cache": "^5.4"
+        "symfony/cache": "^5.4",
+        "symfony/validator": "^6.3"
 
     },
     "require-dev": {
         "phpunit/phpunit": "^10.4"
+    },
+    "scripts": {
+        "unit-test": "./vendor/bin/phpunit --testsuite Unit --testdox --colors=always",
+        "it-test": "./vendor/bin/phpunit --testsuite Integration --testdox --colors=always",
+        "all-tests": "./vendor/bin/phpunit --testdox --colors=always"
     }
 
 
