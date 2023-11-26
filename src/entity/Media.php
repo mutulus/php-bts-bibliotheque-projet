@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 #[entity]
 #[InheritanceType("JOINED")]
@@ -23,13 +25,18 @@ abstract class Media
     protected int $id;
     #[Column(type: "string")]
     protected string $titre;
+
     #[Column(type: "integer")]
-    protected int $idStatut;
+    protected int $idStatut=3;
      #[Column(type: "datetime")]
     protected \DateTime $dateCreation;
      #[Column(type: "integer")]
     protected int $dureeEmprunt;
-
+   /* const Disponible= "Disponible";
+    const Emprunte= "Emprunte";
+    const Nouveau= "Nouveau";
+    const Non_disponible= "Non disponible";
+*/
     public function __construct()
     {
     }
@@ -51,12 +58,12 @@ abstract class Media
 
     public function getIdStatut(): int
     {
-        return $this->idStatut;
+        return $this->idStatut->getStatut();
     }
 
     public function setIdStatut(int $statut): void
     {
-        $this->idStatut = $statut;
+        $this->idStatut=$statut ;
     }
 
     public function getDateCreation(): \DateTime
@@ -66,6 +73,7 @@ abstract class Media
 
     public function setDateCreation(\DateTime $dateCreation): void
     {
+
         $this->dateCreation = $dateCreation;
     }
 

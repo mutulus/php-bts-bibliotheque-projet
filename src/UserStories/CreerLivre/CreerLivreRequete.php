@@ -25,19 +25,19 @@ public int $nbPages;
 #[Assert\NotBlank(
     message: 'La date de parution est obligatoire'
 )]
-#[Assert\DateTime(
+/*#[Assert\DateTime(
     message: 'La date de parution doit être une date'
-)]
-public \DateTime $dateParution;
+)]*/
+public string $dateParution;
 
     /**
      * @param string $titre
      * @param string $isbn
      * @param string $auteur
      * @param int $nbPages
-     * @param \DateTime $dateParution
+     * @param string $dateParution
      */
-    public function __construct(string $titre, string $isbn, string $auteur, int $nbPages, \DateTime $dateParution)
+    public function __construct(string $titre, string $isbn, string $auteur, int $nbPages, string $dateParution)
     {
         $this->titre = $titre;
         $this->isbn = $isbn;

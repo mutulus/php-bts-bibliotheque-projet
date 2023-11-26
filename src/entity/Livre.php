@@ -17,10 +17,7 @@ private int $nbPages;
 #[Column(type: "datetime")]
 private \DateTime $dateParution;
 
-const Disponible= "Disponible";
-const Emprunte= "Emprunte";
-const Disponible= "Disponible";
-const Disponible= "Disponible";
+
 
 
 

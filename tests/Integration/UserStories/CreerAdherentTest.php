@@ -65,8 +65,8 @@ class CreerAdherentTest extends TestCase
         $repository=$this->entityManager->getRepository(Adherent::class);
         $adherent=$repository->findOneBy(['mailAdherent'=>"artursmednis@gmail.com"]);
         $this->assertNotNull($adherent);
-        $this->assertEquals("Arturs",$adherent->getPrenomAdherent());
-        $this->assertEquals("Mednis",$adherent->getNomAdherent());
+        $this->assertEquals("Arturs",$requete->prenom);
+        $this->assertEquals("Mednis",$requete->nom);
     }
     #[test]
     public function creerAdherent_ValeursIncorrectesVide_Exception()

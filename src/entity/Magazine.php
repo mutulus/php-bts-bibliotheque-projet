@@ -27,14 +27,15 @@ class Magazine extends Media
         $this->numero = $numero;
     }
 
-    public function getDatePublication(): \DateTime
+    public function getDatePublication(): string
     {
         return $this->datePublication;
     }
 
-    public function setDatePublication(\DateTime $datePublication): void
+    public function setDatePublication(string $datePublication): void
     {
-        $this->datePublication = $datePublication;
+        $date=\DateTime::createFromFormat("d/m/Y",$datePublication);
+        $this->datePublication = $date;
     }
 
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\UserStories\CreerLivre;
+namespace App\UserStories\CreerMagazine;
 
-use App\entity\Livre;
+use App\entity\Magazine;
 use App\Validateurs\Validateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class CreerLivre
+class CreerMagazine
 {
     private EntityManagerInterface $entityManager;
     private ValidatorInterface $validator;
@@ -24,31 +24,25 @@ class CreerLivre
         $this->validator = $validator;
         $this->validateurBDD = $validateurBDD;
     }
-
-    public function execute(CreerLivreRequete $requete):bool{
-        // Vérification que les données saisies sont valides
+    public function execute(CreerMagazineRequete $requete):bool{
         $violations=$this->validator->validate($requete);
         if (count($violations)==0){
-            // Vérification si l'ISBN est unique
-            $this->validateurBDD->isbnUtilise($requete,$this->entityManager);
-            // Création du livre
-            $livre=new Livre();
-            $livre->setAuteur($requete->auteur);
-            $livre->setTitre($requete->titre);
-            $livre->setIsbn($requete->isbn);
-            $livre->setDateParution($requete->dateParution);
-
-            $livre->setNbPages($requete->nbPages);
-            $date=new \DateTime();
-            $livre->setDateCreation($date);
-            $livre->setDureeEmprunt(21);
+            // Vérification si le numéro magazine est déjà utilisé
+            $this->validateurBDD->numeroMagazineUtilise($requete,$this->entityManager);
+            // Création du Magazine
+            $magazine=new Magazine();
+            $magazine->setTitre($requete->titre);
+            $magazine->setNumero($requete->numero);
+            $magazine->setDatePublication("01/12/2023");
+            $magazine->setDateCreation(new \DateTime());
+            $magazine->setDureeEmprunt(10);
             // Persister en BDD
-            $this->entityManager->persist($livre);
+            $this->entityManager->persist($magazine);
             $this->entityManager->flush();
             return true;
 
         }
-    throw new \Exception("Un ou plusieurs champs sont invalides");
+        throw new \Exception('Un ou plusieurs champs sont invalides');
     }
 
 
