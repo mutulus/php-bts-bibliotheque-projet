@@ -26,7 +26,7 @@ class CreerLivreTest extends TestCase
     protected Validateur $validateurBDD;
     protected function setUp() : void
     {
-        echo "setup ---------------------------------------------------------";
+
         // Configuration de Doctrine pour les tests
         $config = ORMSetup::createAttributeMetadataConfiguration(
             [__DIR__.'/../../../src/'],
