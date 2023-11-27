@@ -24,7 +24,8 @@
         "doctrine/dbal": "^3.2",
         "symfony/yaml": "^5.4",
         "symfony/cache": "^5.4",
-        "symfony/validator": "^6.3"
+        "symfony/validator": "^6.3",
+        "mnapoli/silly": "^1.8"
 
     },
     "require-dev": {

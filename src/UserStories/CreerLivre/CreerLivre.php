@@ -4,7 +4,6 @@ namespace App\UserStories\CreerLivre;
 
 use App\entity\Livre;
 use App\entity\Media;
-use App\entity\Statut;
 use App\Validateurs\Validateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -72,7 +71,6 @@ class CreerLivre
             $livre->setIsbn($requete->isbn);
             $livre->setDateParution($requete->dateParution);
             $livre->setNbPages($requete->nbPages);
-            $repoStatut = $this->entityManager->getRepository(Statut::class);
             $livre->setStatut(Media::NOUVEAU);
             $date = new \DateTime();
             $livre->setDateCreation($date);
