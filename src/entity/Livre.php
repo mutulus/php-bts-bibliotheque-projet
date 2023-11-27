@@ -14,7 +14,7 @@ private string $isbn;
 private string $auteur;
 #[Column(type: "integer")]
 private int $nbPages;
-#[Column(type: "datetime")]
+#[Column(type: "date")]
 private \DateTime $dateParution;
 
 
