@@ -52,9 +52,10 @@ class CreerLivreTest extends TestCase
     }
     #[Test]
     public function creerLivre_valeursCorrectes_TRUE(){
+        //Arrange
         $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan Lee",456,'12/05/2023');
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-
+        //Act
         $creerLivre->execute($requete);
         //Assert
         $repository=$this->entityManager->getRepository(Livre::class);
@@ -64,9 +65,10 @@ class CreerLivreTest extends TestCase
     }
     #[Test]
     public function creerLivre_AuteurVide_Exception(){
+        //Arrange
         $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","",456,'12/05/2023');
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-
+        //Act
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("L'auteur est obligatoire");
         $creerLivre->execute($requete);
@@ -74,9 +76,10 @@ class CreerLivreTest extends TestCase
     }
     #[Test]
     public function creerLivre_TitreVide_Exception(){
+        //Arrange
         $requete=new CreerLivreRequete("","148-DFDZSS","Stan Lee",456,'12/05/2023');
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-
+        //Act
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Le titre est obligatoire");
         $creerLivre->execute($requete);
@@ -84,9 +87,10 @@ class CreerLivreTest extends TestCase
     }
     #[Test]
     public function creerLivre_nbPagesVide_Exception(){
+        //Arrange
         $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan Lee",0,'12/05/2023');
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-
+        //Act
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Le nombre de pages doit être positif");
         $creerLivre->execute($requete);
@@ -94,11 +98,12 @@ class CreerLivreTest extends TestCase
     }
     #[Test]
     public function creerLivre_ISBNDejaUtilise_Exception(){
+        //Arrange
         $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan LEe",456,'12/05/2023');
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
         $requete2=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan LEe",456,'12/05/2023');
         $creerLivre2=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-
+        //Act
         $creerLivre->execute($requete);
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Cet isbn est déjà utilisé");

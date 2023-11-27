@@ -50,9 +50,10 @@ class CreerMagazineTest extends TestCase
     }
 #[Test]
     public function creerMagazine_ValeursCorrects_TRUE(){
+        //Arrange
         $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
-
+        //Act
         $Creermagazine->execute($magazineRequete);
         $repository=$this->entityManager->getRepository(Magazine::class);
         //Assert
@@ -62,18 +63,22 @@ class CreerMagazineTest extends TestCase
     }
     #[Test]
     public function creerMagazine_TitreVide_Exception(){
+        //Arrange
         $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("",14567);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
+        //Act
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Le titre est obligatoire");
         $Creermagazine->execute($magazineRequete);
     }
     #[Test]
     public function creerMagazine_NumeroDejaUtilise_Exception(){
+        //Arrange
         $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
         $magazineRequete2=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);
         $Creermagazine2=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
+        //Act
         $Creermagazine->execute($magazineRequete);
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Ce numero est deja utilise");
