@@ -5,6 +5,7 @@ namespace App\UserStories\CreerLivre;
 use App\entity\Livre;
 use App\entity\Media;
 use App\Validateurs\Validateur;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use foo\bar;
@@ -72,7 +73,7 @@ class CreerLivre
             $livre->setDateParution($requete->dateParution);
             $livre->setNbPages($requete->nbPages);
             $livre->setStatut(Media::NOUVEAU);
-            $date = new \DateTime();
+            $date = new DateTime();
             $livre->setDateCreation($date);
             $livre->setDureeEmprunt(21);
             // Persister en BDD

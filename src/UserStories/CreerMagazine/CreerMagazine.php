@@ -6,6 +6,7 @@ use App\entity\Magazine;
 use App\entity\Media;
 use App\Validateurs\Validateur;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -52,7 +53,7 @@ class CreerMagazine
      * Elle prend en paramètre une requête qui est une classe dans laquelle est inséré un jeu de donnée lié au livre:
      * @param CreerMagazineRequete $requete
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function execute(CreerMagazineRequete $requete):bool{
         $violations=$this->validator->validate($requete);
@@ -77,7 +78,7 @@ class CreerMagazine
         foreach ($violations as $violation){
             $errors[]=$violation->getMessage();
         }
-        throw new \Exception($errors[0]);
+        throw new Exception($errors[0]);
     }
 
 

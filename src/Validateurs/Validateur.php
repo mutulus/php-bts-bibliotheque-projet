@@ -43,7 +43,7 @@ class Validateur
     public function numeroMagazineUtilise(CreerMagazineRequete $magazine,EntityManager $entityManager):bool{
         $repository=$entityManager->getRepository(Magazine::class);
         if ($repository->findOneBy(['numero'=>$magazine->numero])){
-            throw new \Exception("Ce numero est deja utilise");
+            throw new \Exception("Ce numero de magazine est deja utilise");
         }
         return false;
     }

@@ -8,6 +8,7 @@ use App\Services\GenerateurNumeroAdherent;
 use App\Validateurs\Validateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Dotenv\Validator;
+use Exception;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -24,7 +25,7 @@ class CreerAdherent
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param GenerateurNumeroAdherent $generateurNumeroAdherent
+     * @param GenerateurNumeroAdherent|null $generateurNumeroAdherent
      * @param ValidatorInterface $validateur
      * @param Validateur $validateurBDD
      */
@@ -38,10 +39,9 @@ class CreerAdherent
 
 
     /**
-     * @param EntityManagerInterface $entityManager
-     * @param GenerateurNumeroAdherent $generateurNumeroAdherent
-     * @param ValidatorInterface $validateur
-     * @param Validateur $validateurBDD
+     * @param CreerAdherentRequete $requete
+     * @return bool|array
+     * @throws Exception
      */
 
 
@@ -78,7 +78,7 @@ class CreerAdherent
         foreach ($violations as $violation){
             $errors[]=$violation->getMessage();
         }
-        throw new \Exception($errors[0]);
+        throw new Exception($errors[0]);
 
     }
 
