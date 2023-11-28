@@ -15,6 +15,7 @@ $app = new \Silly\Application();
 $app->command('creerLivre', function (\Symfony\Component\Console\Style\SymfonyStyle $io) use ($entityManager) {
 
     $io->title('Créer un livre');
+    $io->note("Il est nécessaire de remplir chaque champ avec les valeurs corrects");
     $io->text("Voici l'interface de création et d'insertion dans la base de données d'un livre");
     $titre = $io->ask("Entrez le titre du livre");
     while ($titre==null){

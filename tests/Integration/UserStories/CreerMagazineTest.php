@@ -81,7 +81,7 @@ class CreerMagazineTest extends TestCase
         //Act
         $Creermagazine->execute($magazineRequete);
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("Ce numero est deja utilise");
+        $this->expectExceptionMessage("Ce numero de magazine est deja utilise");
         $Creermagazine2->execute($magazineRequete2);
 
     }
