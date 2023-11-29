@@ -41,6 +41,6 @@ class Magazine extends Media
 
     function getType(): string
     {
-        return strtolower(get_class($this));
+        return strtolower((new \ReflectionClass($this))->getShortName());
     }
 }
