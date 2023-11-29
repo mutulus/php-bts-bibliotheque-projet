@@ -1,7 +1,10 @@
 # User Stories
 #### Code source
-* [Class principale](../../src/UserStories/CreerLivre/CreerLivre.php)
+* [Class de création de livre](../../src/UserStories/CreerLivre/CreerLivre.php)
 * [Class de requête](../../src/UserStories/CreerLivre/CreerLivreRequete.php)
+* [Class mère du média](../../src/entity/Media.php)
+* [Class de l'objet livre](../../src/entity/Livre.php)
+
 ## Créer livre
 ``` Voici comment créer un livre et l'insérer dans la base de données ```
 ### Description
@@ -60,6 +63,8 @@ La Class [Validateur](../../src/Validateurs/Validateur.php) va ici être utilis�
 ```
 * 4.
 **_Le Livre sera crée et envoyé dans la base de donnée grace à l'entityManager_**
+
+Afin de créer le livre une commande avec Silly est possible: `php app.php creerLivre`
 
 
 

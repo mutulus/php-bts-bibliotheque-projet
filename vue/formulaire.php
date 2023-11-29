@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" ){
     <title>Formulaire</title>
 </head>
 <body>
+<h1>Création d'un adhérent</h1>
 <form action="" method="post">
     <label for="prenom">Prénom</label>
     <input type="text" name="prenom" id="prenom">

@@ -49,8 +49,8 @@ class CreerAdherent
     {
 
         // Valider les données en entrées (de la requête)
-        $violations = $this->validateur->validate($requete);
-        if (count($violations) == 0) {
+        $erreurs = $this->validateur->validate($requete);
+        if (count($erreurs) == 0) {
             // Vérifier que l'email n'existe pas déjà
 
             $this->validateurBDD->mailDispo($requete,$this->entityManager);
@@ -75,10 +75,10 @@ class CreerAdherent
         }
 
         $errors=[];
-        foreach ($violations as $violation){
-            $errors[]=$violation->getMessage();
+        foreach ($erreurs as $erreur){
+            $errors[]=$erreur->getMessage();
         }
-        throw new Exception($errors[0]);
+        throw new Exception(implode(' ',$errors[]));
 
     }
 

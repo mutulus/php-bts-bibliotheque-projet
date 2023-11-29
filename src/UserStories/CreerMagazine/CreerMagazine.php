@@ -56,15 +56,15 @@ class CreerMagazine
      * @throws Exception
      */
     public function execute(CreerMagazineRequete $requete):bool{
-        $violations=$this->validator->validate($requete);
-        if (count($violations)==0){
+        $erreurs=$this->validator->validate($requete);
+        if (count($erreurs)==0){
             // Vérification si le numéro magazine est déjà utilisé
             $this->validateurBDD->numeroMagazineUtilise($requete,$this->entityManager);
             // Création du Magazine
             $magazine=new Magazine();
             $magazine->setTitre($requete->titre);
             $magazine->setNumero($requete->numero);
-            $magazine->setDatePublication("01/12/2023");
+            $magazine->setDatePublication($requete->datePublication);
             $magazine->setDateCreation(new \DateTime());
             $magazine->setDureeEmprunt(10);
             $magazine->setStatut(Media::NOUVEAU);
@@ -75,8 +75,8 @@ class CreerMagazine
 
         }
         $errors=[];
-        foreach ($violations as $violation){
-            $errors[]=$violation->getMessage();
+        foreach ($erreurs as $erreur){
+            $errors[]=$erreur->getMessage();
         }
         throw new Exception($errors[0]);
     }

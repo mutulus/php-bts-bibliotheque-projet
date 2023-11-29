@@ -60,5 +60,9 @@ class BlueRay extends Media
     {
         $this->dateLimite = $dateLimite;
     }
+    function getType(): string
+    {
+        return strtolower(__CLASS__);
+    }
 
 }

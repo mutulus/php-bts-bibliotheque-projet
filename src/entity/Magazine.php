@@ -9,7 +9,7 @@ class Magazine extends Media
 {
     #[Column (type: "integer")]
     private int $numero;
-    #[Column(type: "datetime")]
+    #[Column(type: "date")]
     private \DateTime $datePublication;
 
     public function __construct()
@@ -27,17 +27,20 @@ class Magazine extends Media
         $this->numero = $numero;
     }
 
-    public function getDatePublication(): string
+    public function getDatePublication(): \DateTime
     {
         return $this->datePublication;
     }
 
-    public function setDatePublication(string $datePublication): void
+    public function setDatePublication(\DateTime $datePublication): void
     {
-        $date=\DateTime::createFromFormat("d/m/Y",$datePublication);
-        $this->datePublication = $date;
+
+        $this->datePublication = $datePublication;
     }
 
 
-
+    function getType(): string
+    {
+        return strtolower(__CLASS__);
+    }
 }

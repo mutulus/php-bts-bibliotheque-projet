@@ -26,16 +26,22 @@ class CreerMagazineRequete
     )]
 
     public int $numero;
+    #[Assert\NotBlank(
+        message: 'La date de publication est obligatoire'
+)]
+    public \DateTime $datePublication;
 
     /**
      *  ## Création de la requête avec les informations du magazine
      * @param string $titre
      * @param int $numero
+     * @param \DateTime $datePublication
      */
-    public function __construct(string $titre, int $numero)
+    public function __construct(string $titre, int $numero,\DateTime $datePublication)
     {
         $this->titre = $titre;
         $this->numero = $numero;
+        $this->datePublication=$datePublication;
     }
 
 

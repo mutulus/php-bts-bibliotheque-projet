@@ -32,7 +32,7 @@ abstract class Media
     protected string $titre;
     #[Column(type: "string")]
     protected string $statut;
-     #[Column(type: "datetime")]
+     #[Column(type: "date")]
     protected \DateTime $dateCreation;
      #[Column(type: "integer")]
     protected int $dureeEmprunt;
@@ -88,6 +88,8 @@ abstract class Media
     {
         $this->dureeEmprunt = $dureeEmprunt;
     }
+
+    abstract function getType():string;
 
 }
 

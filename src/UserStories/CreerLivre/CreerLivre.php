@@ -61,8 +61,8 @@ class CreerLivre
     public function execute(CreerLivreRequete $requete): bool
     {
         // Vérification que les données saisies sont valides
-        $violations = $this->validator->validate($requete);
-        if (count($violations) == 0) {
+        $erreurs = $this->validator->validate($requete);
+        if (count($erreurs) == 0) {
             // Vérification si l'ISBN est unique
             $this->validateurBDD->isbnUtilise($requete, $this->entityManager);
             // Création du livre
@@ -83,8 +83,8 @@ class CreerLivre
 
         }
         $errors = [];
-        foreach ($violations as $violation) {
-            $errors[] = $violation->getMessage();
+        foreach ($erreurs as $erreur) {
+            $errors[] = $erreur->getMessage();
         }
         throw new Exception($errors[0]);
 

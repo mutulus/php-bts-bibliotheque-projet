@@ -12,6 +12,7 @@ use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -51,7 +52,8 @@ class CreerMagazineTest extends TestCase
 #[Test]
     public function creerMagazine_ValeursCorrects_TRUE(){
         //Arrange
-        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);
+        $date=\DateTime::createFromFormat("d/m/Y","01/10/2020");
+        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
         //Act
         $Creermagazine->execute($magazineRequete);
@@ -64,7 +66,8 @@ class CreerMagazineTest extends TestCase
     #[Test]
     public function creerMagazine_TitreVide_Exception(){
         //Arrange
-        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("",14567);
+        $date=\DateTime::createFromFormat("d/m/Y","01/10/2020");
+        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("",14567,$date);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
         //Act
         $this->expectException(\Exception::class);
@@ -74,9 +77,10 @@ class CreerMagazineTest extends TestCase
     #[Test]
     public function creerMagazine_NumeroDejaUtilise_Exception(){
         //Arrange
-        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);
+        $date=\DateTime::createFromFormat("d/m/Y","01/10/2020");
+        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
         $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
-        $magazineRequete2=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567);
+        $magazineRequete2=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
         $Creermagazine2=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
         //Act
         $Creermagazine->execute($magazineRequete);

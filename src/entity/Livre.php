@@ -67,6 +67,10 @@ public function __construct()
         $date=\DateTime::createFromFormat('d/m/Y',$dateParution);
         $this->dateParution = $date;
     }
+    function getType(): string
+    {
+        return strtolower(__CLASS__);
+    }
 
 
 
