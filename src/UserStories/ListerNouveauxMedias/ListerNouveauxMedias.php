@@ -20,7 +20,7 @@ class ListerNouveauxMedias
     public function execute():array|false{
         $mediasFormates=[];
         $repository=$this->entityManager->getRepository(Media::class);
-        $medias=$repository->findBy(['statut'=>Media::NOUVEAU],['titre'=>'desc']);
+        $medias=$repository->findBy(['statut'=>Media::NOUVEAU],['dateCreation'=>'desc']);
         foreach ($medias as $media){
             $mediaFront=new MediaFront($media->getId(),$media->getTitre(),$media->getStatut(),$media->getDateCreation(),$media->getType());
             $mediasFormates[]=$mediaFront;

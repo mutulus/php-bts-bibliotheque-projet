@@ -32,7 +32,7 @@ abstract class Media
     protected string $titre;
     #[Column(type: "string")]
     protected string $statut;
-     #[Column(type: "date")]
+     #[Column(type: "datetime")]
     protected \DateTime $dateCreation;
      #[Column(type: "integer")]
     protected int $dureeEmprunt;
