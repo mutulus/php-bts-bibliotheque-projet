@@ -41,6 +41,6 @@ class Magazine extends Media
 
     function getType(): string
     {
-        return strtolower(__CLASS__);
+        return strtolower(get_class($this));
     }
 }
