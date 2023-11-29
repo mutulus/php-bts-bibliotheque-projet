@@ -86,7 +86,7 @@ class CreerLivre
         foreach ($erreurs as $erreur) {
             $errors[] = $erreur->getMessage();
         }
-        throw new Exception($errors[0]);
+        throw new Exception(implode(' ',$errors));
 
 
     }
