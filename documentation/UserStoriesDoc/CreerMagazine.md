@@ -65,7 +65,7 @@ La Class [Validateur](../../src/Validateurs/Validateur.php) va ici être utilis�
 **_Le Magazine sera crée et envoyé dans la base de donnée grace à l'entityManager_**
 
 
-Afin de créer le magazine une commande avec Silly est possible: `php app.php creerMagazine`
+Afin de créer le magazine une commande est possible: `php app.php creerMagazine`
 
 
 

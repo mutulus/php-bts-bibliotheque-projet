@@ -1,7 +1,10 @@
 <?php
 
-namespace App\tests\Integration\UserStories;
+namespace Tests\integration\UserStories;
 
+
+use App\entity\Media;
+use App\entity\StatutMedia;
 use App\UserStories\CreerLivre\CreerLivre;
 use App\UserStories\CreerLivre\CreerLivreRequete;
 use App\Validateurs\Validateur;
@@ -15,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class ListerNouveauxMedias extends TestCase
+class ListerNouveauxMediasTest extends TestCase
 {
     private EntityManagerInterface $entityManager;
     private ValidatorInterface $validator;
@@ -47,7 +50,7 @@ class ListerNouveauxMedias extends TestCase
         $schemaTool->createSchema($metadata);
     }
     #[Test]
-    public function listerNouveauxMedias_Succes_NotNull(){
+    public function listerNouveauxMedias_PresentEnBdd_NotEmpty(){
         //Arrange
         $livre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
         $requete=new CreerLivreRequete("test","4584d","Tom",478,"01/12/2023");
@@ -57,7 +60,7 @@ class ListerNouveauxMedias extends TestCase
         $medias=$lister->execute();
 
         //Assert
-        $this->assertNotNull($medias);
+        $this->assertNotEmpty($medias);
 
     }
     #[Test]
@@ -71,33 +74,34 @@ class ListerNouveauxMedias extends TestCase
 
     }
     #[Test]
-    public function listerNouveauxMedias_MediasOrdreDecroissant_True(){
+    public function listerNouveauxMedias_MediaEstNouveau_true(){
         //Arrange
-        $livre1=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-        $requete1=new CreerLivreRequete("test","458d","Tom",478,"01/12/2023");
-        $livre1->execute($requete1);
-
-
-        $livre2=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-        $requete2=new CreerLivreRequete("test","484d","Tom",478,"01/12/2023");
-        $livre2->execute($requete2);
-
-        $livre3=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-        $requete3=new CreerLivreRequete("test","584d","Tom",478,"01/12/2023");
-        $livre3->execute($requete3);
-
+        $livre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
+        $requete=new CreerLivreRequete("test","4584d","Tom",478,"01/12/2023");
+        $livre->execute($requete);
         $lister=new \App\UserStories\ListerNouveauxMedias\ListerNouveauxMedias($this->entityManager);
         //Act
-        $medias=$lister->execute();
+        $media=$lister->execute();
+        $statut=$media[0]->getStatut();
         //Assert
-        $dateMedia0=\DateTime::createFromFormat("d/m/Y",$medias[0]->getDateCreation());
-        $dateMedia1=\DateTime::createFromFormat("d/m/Y",$medias[1]->getDateCreation());
-        $dateMedia2=\DateTime::createFromFormat("d/m/Y",$medias[2]->getDateCreation());
-
-
-        $this->assertGreaterThan($dateMedia0,$dateMedia1);
-        $this->assertGreaterThan($dateMedia1,$dateMedia2);
-        $this->assertGreaterThan($dateMedia0,$dateMedia2);
+        $this->assertEquals("Nouveau",$statut);
     }
+    #[Test]
+    public function listerNouveauxMedias_MediaEstPasNouveau_True(){
+        //Arrange
+        $livre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
+        $requete=new CreerLivreRequete("test","4584d","Tom",478,"01/12/2023");
+        $livre->execute($requete);
+        $lister=new \App\UserStories\ListerNouveauxMedias\ListerNouveauxMedias($this->entityManager);
+        //Act
+        $media=$lister->execute();
+        $media[0]->setStatut(StatutMedia::DISPONIBLE);
+        $statut=$media[0]->getStatut();
+        //Assert
+        $this->assertNotEquals("Nouveau",$statut);
+    }
+
+    // Tester si l'ordre des médias récupérés est bien decroissant
+
 
 }

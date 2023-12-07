@@ -53,6 +53,26 @@ class MediaFront
         return $this->type;
     }
 
+    public function setTitre(string $titre): void
+    {
+        $this->titre = $titre;
+    }
+
+    public function setStatut(string $statut): void
+    {
+        $this->statut = $statut;
+    }
+
+    public function setDateCreation(DateTime $dateCreation): void
+    {
+        $this->dateCreation = $dateCreation;
+    }
+
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
 
 
 }

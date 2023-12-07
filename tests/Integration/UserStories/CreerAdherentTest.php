@@ -119,17 +119,5 @@ class CreerAdherentTest extends TestCase
 
     }
 
-    /*#[test]
-    public function creerAdherent_numeroUtilise_Exception(){
-        $requete=new CreerAdherentRequete("Arturs","Mednis","artursmednis2003@gmail.com");
-        $ceerAdherent=new CreerAdherent($this->entityManager,$this->generateurNumeroAdherent,$this->validator,$this->validateurBDD);
-        $ceerAdherent->execute($requete);
 
-        $adherent2=new Adherent();
-        $adherent2->setNumeroAdherent("AD-12456");
-        $adherentpush2=new CreerAdherent($this->entityManager,null,$this->validator,$this->validateurBDD);
-
-        ;
-
-    }*/
 }

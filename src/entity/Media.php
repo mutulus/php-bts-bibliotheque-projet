@@ -20,10 +20,6 @@ use Symfony\Component\Validator\Constraints\NotNull;
 #[DiscriminatorMap(["livre"=>"Livre","magazine"=>"Magazine","BlueRay"=>"BlueRay"])]
 abstract class Media
 {
-    public const DISPONIBLE="Disponible";
-    public const EMPRUNTE="Emprunte";
-    public const NON_DISPONIBLE="Non disponible";
-    public const NOUVEAU ="Nouveau";
     #[id]
     #[GeneratedValue]
     #[Column(type: "integer")]
