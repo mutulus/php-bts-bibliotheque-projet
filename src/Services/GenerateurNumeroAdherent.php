@@ -13,4 +13,3 @@ class GenerateurNumeroAdherent
         return $numero;
     }
 }
-// Après il faudra réaliser des tests unitaires pour assurer le fonctionnement de ce service

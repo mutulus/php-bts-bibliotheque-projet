@@ -64,7 +64,7 @@ La Class [Validateur](../../src/Validateurs/Validateur.php) va ici être utilis�
 * 4.
 **_Le Livre sera crée et envoyé dans la base de donnée grace à l'entityManager_**
 
-Afin de créer le livre une commande avec Silly est possible: `php app.php creerLivre`
+Afin de créer le livre une commande est possible: `php app.php creerLivre`
 
 
 

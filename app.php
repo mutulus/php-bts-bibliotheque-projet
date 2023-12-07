@@ -6,6 +6,7 @@ use App\UserStories\CreerLivre\CreerLivre;
 use App\UserStories\CreerLivre\CreerLivreRequete;
 use App\UserStories\CreerMagazine\CreerMagazine;
 use App\UserStories\CreerMagazine\CreerMagazineRequete;
+use App\UserStories\ListerNouveauxMedias\ListerNouveauxMedias;
 use App\Validateurs\Validateur;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -28,7 +29,7 @@ $app->command('creerLivre', function (SymfonyStyle $io) use ($entityManager) {
 
     $dateParution = $io->ask("Entrez la date de parution du livre au format jj/mm/YYYY");
 
-    $validateur = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
+    $validateur = Validation::createValidatorBuilder()->getValidator();
     $validateurBDD = new Validateur();
     $requete = new CreerLivreRequete($titre, $isbn, $auteur, $nbPages, $dateParution);
     $creerLivre = new CreerLivre($entityManager,$validateur, $validateurBDD);
@@ -50,12 +51,29 @@ $app->command('creerMagazine', function (SymfonyStyle $io) use ($entityManager) 
 
     $datePubli=DateTime::createFromFormat("d/m/Y",$datePublication);
 
-    $validateur = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
+    $validateur = Validation::createValidatorBuilder()->getValidator();
     $validateurBDD = new Validateur();
     $requete = new CreerMagazineRequete($titre,$numero,$datePubli);
     $creerMagazine = new CreerMagazine($entityManager,$validateur, $validateurBDD);
+
     $creerMagazine->execute($requete);
     $io->success("Un magazine a bien été inséré dans la base de données");
+});
+
+$app->command('listerNouveauxMedias',function (SymfonyStyle $io,OutputInterface $output)use ($entityManager){
+
+   $creerListe=new ListerNouveauxMedias($entityManager);
+   $medias=$creerListe->execute();
+   $table=new \Symfony\Component\Console\Helper\Table($output);
+   $table->setHeaderTitle("Liste des nouveaux médias");
+   $table->setHeaders(['id','titre','statut','dateCreation','typeMedia']);
+  foreach ($medias as $media){
+     $table->addRow([$media->getId(),$media->getTitre(),$media->getStatut(),$media->getDateCreation(),$media->getType()]);
+
+  }
+   $table->setStyle("borderless");
+   $table->render();
+
 });
 
 

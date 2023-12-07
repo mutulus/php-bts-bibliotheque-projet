@@ -4,6 +4,7 @@ namespace App\UserStories\CreerLivre;
 
 use App\entity\Livre;
 use App\entity\Media;
+use App\entity\StatutMedia;
 use App\Validateurs\Validateur;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,7 +73,7 @@ class CreerLivre
             $livre->setIsbn($requete->isbn);
             $livre->setDateParution($requete->dateParution);
             $livre->setNbPages($requete->nbPages);
-            $livre->setStatut(Media::NOUVEAU);
+            $livre->setStatut(StatutMedia::NOUVEAU);
             $date = new DateTime();
             $livre->setDateCreation($date);
             $livre->setDureeEmprunt(21);

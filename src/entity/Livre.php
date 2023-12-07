@@ -69,7 +69,7 @@ public function __construct()
     }
     function getType(): string
     {
-        return strtolower(get_class($this));
+        return strtolower((new \ReflectionClass($this))->getShortName());
     }
 
 

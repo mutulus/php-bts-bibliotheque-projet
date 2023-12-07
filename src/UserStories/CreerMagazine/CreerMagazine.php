@@ -4,6 +4,7 @@ namespace App\UserStories\CreerMagazine;
 
 use App\entity\Magazine;
 use App\entity\Media;
+use App\entity\StatutMedia;
 use App\Validateurs\Validateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -67,7 +68,7 @@ class CreerMagazine
             $magazine->setDatePublication($requete->datePublication);
             $magazine->setDateCreation(new \DateTime());
             $magazine->setDureeEmprunt(10);
-            $magazine->setStatut(Media::NOUVEAU);
+            $magazine->setStatut(StatutMedia::NOUVEAU);
             // Persister en BDD
             $this->entityManager->persist($magazine);
             $this->entityManager->flush();
