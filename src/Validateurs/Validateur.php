@@ -5,6 +5,8 @@ namespace App\Validateurs;
 use App\entity\Adherent;
 use App\entity\Livre;
 use App\entity\Magazine;
+use App\entity\Media;
+use App\entity\StatutMedia;
 use App\UserStories\CreerAdherent\CreerAdherent;
 use App\UserStories\CreerAdherent\CreerAdherentRequete;
 use App\UserStories\CreerLivre\CreerLivreRequete;
@@ -44,6 +46,26 @@ class Validateur
         $repository=$entityManager->getRepository(Magazine::class);
         if ($repository->findOneBy(['numero'=>$magazine->numero])){
             throw new \Exception("Ce numero de magazine est deja utilise");
+        }
+        return false;
+    }
+
+    public function mediaPasNouveau(EntityManager $entityManager,int $idMedia):bool
+    {
+        $repository=$entityManager->getRepository(Media::class);
+        $media=$repository->find($idMedia);
+        if ($media->getStatut()!=StatutMedia::NOUVEAU) {
+            throw new \Exception("Seul un média sous statut 'Nouveau' peut être rendu disponible");
+        }
+        return true;
+    }
+
+    public function mediaExistePas(EntityManager $entityManager,int $idMedia):bool
+    {
+        $repository=$entityManager->getRepository(Media::class);
+        $media=$repository->find($idMedia);
+        if (empty($media)){
+            throw new \Exception("Le média n'existe pas");
         }
         return false;
     }
