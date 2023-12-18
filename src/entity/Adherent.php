@@ -22,8 +22,8 @@ class Adherent
     private string $nomAdherent;
     #[Column(length: 60)]
     private string $mailAdherent;
-    #[Column(type: Types::DATE_MUTABLE)]
-    private \DateTime $dateAdhesion;
+    #[Column(type: Types::DATE_MUTABLE,nullable: true)]
+    private ?\DateTime $dateAdhesion=null;
 
     public function __construct()
     {

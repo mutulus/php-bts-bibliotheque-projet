@@ -33,6 +33,7 @@ class CreerEmprunt
         // Vérifier que le média et l'adhérent sont en base de données
         $this->validateurBDD->adherentExistePas($this->entityManager, $idAdherent);
         $this->validateurBDD->mediaExistePas($this->entityManager, $idMedia);
+        $this->validateurBDD->mediaPasDisponible($this->entityManager,$idMedia);
 
         $adherent=$this->entityManager->find(Adherent::class,$idAdherent);
         $media=$this->entityManager->find(Media::class,$idMedia);
