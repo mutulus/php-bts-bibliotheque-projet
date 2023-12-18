@@ -30,7 +30,8 @@ class CreerEmprunt
     public function execute(int $idMedia, int $idAdherent)
     {
         $emprunt=new Emprunt();
-        // Vérifier que le média et l'adhérent sont en base de données
+        // Vérifications
+        $this->validateurBDD->adhesionPasValable($this->entityManager,$idAdherent);
         $this->validateurBDD->adherentExistePas($this->entityManager, $idAdherent);
         $this->validateurBDD->mediaExistePas($this->entityManager, $idMedia);
         $this->validateurBDD->mediaPasDisponible($this->entityManager,$idMedia);
@@ -39,10 +40,14 @@ class CreerEmprunt
         $media=$this->entityManager->find(Media::class,$idMedia);
         $media->setStatut(StatutMedia::EMPRUNTE);
         $emprunt->setNumeroEmprunt($this->numeroEmprunt->generer());
-        $emprunt->setDateEmprunt("18/12/2023");
+        // Date emprunt générée automatiquement
+        $emprunt->setDateEmprunt(new \DateTime());
         $emprunt->setAdherent($adherent);
         $emprunt->setMediaEmprunte($media);
-        $emprunt->setDateRetourEstimee('20/12/2023');
+        $dateRetour=new \DateTime();
+        $dateRetour->modify("+".$media->getDureeEmprunt()."days");
+        $emprunt->setDateRetourEstimee($dateRetour);
+
         $this->entityManager->persist($emprunt);
         $this->entityManager->flush();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\integration\UserStories;
+namespace tests\integration\UserStories;
 
 use App\entity\Livre;
 use App\entity\Media;

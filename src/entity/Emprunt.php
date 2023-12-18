@@ -39,16 +39,16 @@ class Emprunt
         }
     }
 
-    public function setDateEmprunt(string $dateEmprunt): void
+    public function setDateEmprunt(\DateTime $dateEmprunt): void
     {
-        $date=\DateTime::createFromFormat("d/m/Y",$dateEmprunt);
+
         $this->dateEmprunt = $date;
     }
 
-    public function setDateRetourEstimee(string $dateRetourEstimee): void
+    public function setDateRetourEstimee(\DateTime $dateRetourEstimee): void
     {
-        $date=\DateTime::createFromFormat("d/m/Y",$dateRetourEstimee);
-        $this->dateRetourEstimee = $date;
+
+        $this->dateRetourEstimee = $dateRetourEstimee;
     }
 
 

@@ -7,6 +7,6 @@ require_once "bootstrap.php";
 $validateurBDD=new Validateur();
 $generateur=new \App\Services\GenerateurNumeroEmprunt();
 $creerEmprunt=new \App\UserStories\CreerEmprunt\CreerEmprunt($entityManager,$validateurBDD,$generateur);
-$creerEmprunt->execute(77,2);
+$creerEmprunt->execute(1,1);
 
 

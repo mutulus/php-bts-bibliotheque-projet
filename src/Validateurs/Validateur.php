@@ -3,6 +3,7 @@
 namespace App\Validateurs;
 
 use App\entity\Adherent;
+use App\entity\Emprunt;
 use App\entity\Livre;
 use App\entity\Magazine;
 use App\entity\Media;
@@ -105,5 +106,6 @@ class Validateur
         }
         return false;
     }
+
 
 }
