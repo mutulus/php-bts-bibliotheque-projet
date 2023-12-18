@@ -79,7 +79,7 @@ class CreerMagazine
         foreach ($erreurs as $erreur){
             $errors[]=$erreur->getMessage();
         }
-        throw new Exception(implode(' ',$errors));
+        throw new Exception(implode('SE',$errors));
     }
 
 

@@ -57,7 +57,7 @@ class RendreMediaDisponibleTest extends TestCase
     {
         $repository=$this->entityManager->getRepository(Livre::class);
         $changerStatut=new RendreDispoMedia($this->entityManager,$this->validateurBDD);
-        $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan",456,'12/05/2023');
+        $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan",456);
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
         $creerLivre->execute($requete);
 
@@ -84,7 +84,7 @@ class RendreMediaDisponibleTest extends TestCase
     {
         $repository=$this->entityManager->getRepository(Livre::class);
         $changerStatut=new RendreDispoMedia($this->entityManager,$this->validateurBDD);
-        $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan",456,'12/05/2023');
+        $requete=new CreerLivreRequete("Spider-man","148-DFDZSS","Stan",456);
         $creerLivre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
         $creerLivre->execute($requete);
 

@@ -41,7 +41,7 @@ class ListerNouveauxMediasTest extends TestCase
 
         // Création de l'entity manager
         $this->entityManager = new EntityManager($connection, $config);
-        $this->validator=Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
+        $this->validator=Validation::createValidatorBuilder()->getValidator();
         $this->validateurBDD=new Validateur();
 
         // Création du schema de la base de données
@@ -53,7 +53,7 @@ class ListerNouveauxMediasTest extends TestCase
     public function listerNouveauxMedias_PresentEnBdd_NotEmpty(){
         //Arrange
         $livre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-        $requete=new CreerLivreRequete("test","4584d","Tom",478,"01/12/2023");
+        $requete=new CreerLivreRequete("test","4584d","Tom",478);
         $livre->execute($requete);
         $lister=new \App\UserStories\ListerNouveauxMedias\ListerNouveauxMedias($this->entityManager);
         //Act
@@ -77,7 +77,7 @@ class ListerNouveauxMediasTest extends TestCase
     public function listerNouveauxMedias_MediaEstNouveau_true(){
         //Arrange
         $livre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-        $requete=new CreerLivreRequete("test","4584d","Tom",478,"01/12/2023");
+        $requete=new CreerLivreRequete("test","4584d","Tom",478);
         $livre->execute($requete);
         $lister=new \App\UserStories\ListerNouveauxMedias\ListerNouveauxMedias($this->entityManager);
         //Act
@@ -90,7 +90,7 @@ class ListerNouveauxMediasTest extends TestCase
     public function listerNouveauxMedias_MediaEstPasNouveau_True(){
         //Arrange
         $livre=new CreerLivre($this->entityManager,$this->validator,$this->validateurBDD);
-        $requete=new CreerLivreRequete("test","4584d","Tom",478,"01/12/2023");
+        $requete=new CreerLivreRequete("test","4584d","Tom",478);
         $livre->execute($requete);
         $lister=new \App\UserStories\ListerNouveauxMedias\ListerNouveauxMedias($this->entityManager);
         //Act

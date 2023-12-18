@@ -29,6 +29,7 @@ class CreerMagazineRequete
     #[Assert\NotBlank(
         message: 'La date de publication est obligatoire'
 )]
+    #[Assert\DateTime]
     public \DateTime $datePublication;
 
     /**

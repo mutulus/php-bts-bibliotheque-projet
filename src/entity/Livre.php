@@ -14,8 +14,7 @@ private string $isbn;
 private string $auteur;
 #[Column(type: "integer")]
 private int $nbPages;
-#[Column(type: "date")]
-private \DateTime $dateParution;
+
 
 
 
@@ -57,16 +56,7 @@ public function __construct()
         $this->nbPages = $nbPages;
     }
 
-    public function getDateParution(): \DateTime
-    {
-        return $this->dateParution;
-    }
 
-    public function setDateParution(string $dateParution): void
-    {
-        $date=\DateTime::createFromFormat('d/m/Y',$dateParution);
-        $this->dateParution = $date;
-    }
     function getType(): string
     {
         return strtolower((new \ReflectionClass($this))->getShortName());

@@ -3,13 +3,12 @@
 namespace App\UserStories\CreerLivre;
 
 use App\entity\Livre;
-use App\entity\Media;
 use App\entity\StatutMedia;
 use App\Validateurs\Validateur;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use foo\bar;
+
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
@@ -71,7 +70,6 @@ class CreerLivre
             $livre->setAuteur($requete->auteur);
             $livre->setTitre($requete->titre);
             $livre->setIsbn($requete->isbn);
-            $livre->setDateParution($requete->dateParution);
             $livre->setNbPages($requete->nbPages);
             $livre->setStatut(StatutMedia::NOUVEAU);
             $date = new DateTime();
@@ -87,7 +85,8 @@ class CreerLivre
         foreach ($erreurs as $erreur) {
             $errors[] = $erreur->getMessage();
         }
-        throw new Exception(implode('SE',$errors));
+
+        throw new \Exception(implode('SE', $errors));
 
 
     }

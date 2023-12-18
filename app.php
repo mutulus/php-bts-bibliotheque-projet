@@ -41,48 +41,56 @@ $app->command('creerLivre', function (SymfonyStyle $io) use ($entityManager) {
     }
 
 
-    $dateParution = $io->ask("Entrez la date de parution du livre au format jj/mm/YYYY");
-    if (empty($dateParution)){
-        $dateParution="";
-        //Enlever date parution de la base
-    }
 
-
-    $validateur = Validation::createValidatorBuilder()->getValidator();
+    $validateur = Validation::createValidatorBuilder()->enableAttributeMapping()->getValidator();
     $validateurBDD = new Validateur();
-    $requete = new CreerLivreRequete($titre, $isbn, $auteur, $nbPages, $dateParution);
+    $requete = new CreerLivreRequete($titre, $isbn, $auteur, $nbPages);
     $creerLivre = new CreerLivre($entityManager,$validateur, $validateurBDD);
     try {
         $creerLivre->execute($requete);
-    }catch (Exception $e){
-
+    }catch (Exception $e){}
+    if (isset($e)){
         $io->error(explode("SE",$e->getMessage()));
+    }else {
+        $io->success("Un livre a bien été inséré dans la base de données");
     }
-
-    $io->success("Un livre a bien été inséré dans la base de données");
 });
 
 
 $app->command('creerMagazine', function (SymfonyStyle $io) use ($entityManager) {
 
+
     $io->title('Créer un Magazine');
     $io->note("Il est nécessaire de remplir chaque champ avec les valeurs corrects");
     $io->text("Voici l'interface de création et d'insertion dans la base de données d'un magazine");
     $titre = $io->ask("Entrez le titre du magazine");
+    if (empty($titre)){
+        $titre='';
+    }
 
     $numero = $io->ask("Entrez le numéro du magazine");
+    if (empty($numero)){
+        $numero=-1;
+    }
 
     $datePublication=$io->ask("Veuillez saisir la date de publication du magazine au format jj/mm/AAAA");
-
     $datePubli=DateTime::createFromFormat("d/m/Y",$datePublication);
 
-    $validateur = Validation::createValidatorBuilder()->getValidator();
+
+    $validateur = Validation::createValidatorBuilder()->enableAttributeMapping()->getValidator();
     $validateurBDD = new Validateur();
     $requete = new CreerMagazineRequete($titre,$numero,$datePubli);
     $creerMagazine = new CreerMagazine($entityManager,$validateur, $validateurBDD);
 
-    $creerMagazine->execute($requete);
-    $io->success("Un magazine a bien été inséré dans la base de données");
+    try {
+        $creerMagazine->execute($requete);
+    }catch (Exception $e){}
+    if (isset($e)){
+        $io->error(explode("SE",$e->getMessage()));
+    }else {
+        $io->success("Un livre a bien été inséré dans la base de données");
+    }
+
 });
 
 $app->command('listerNouveauxMedias',function (SymfonyStyle $io,OutputInterface $output)use ($entityManager){

@@ -44,14 +44,8 @@ class CreerLivreRequete
         message: 'Le nombre de pages doit être positif'
     )]
     public int $nbPages;
-    /**
-     * @var string
-     * Declaration de la date de parution du livre
-     */
-    #[Assert\NotBlank(
-        message: 'La date de parution est obligatoire'
-    )]
-    public string $dateParution;
+
+
 
     /**
      *  ## Construction de la requête avec les informations du livre
@@ -59,15 +53,14 @@ class CreerLivreRequete
      * @param string $isbn
      * @param string $auteur
      * @param int $nbPages
-     * @param string $dateParution
+
  */
-    public function __construct(string $titre, string $isbn, string $auteur, int $nbPages, string $dateParution)
+    public function __construct(string $titre, string $isbn, string $auteur, int $nbPages)
     {
         $this->titre = $titre;
         $this->isbn = $isbn;
         $this->auteur = $auteur;
         $this->nbPages = $nbPages;
-        $this->dateParution = $dateParution;
     }
 
 
