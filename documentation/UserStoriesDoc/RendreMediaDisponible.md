@@ -4,7 +4,7 @@
 
 
 
-## Lister nouveaux médias
+## Rendre média disponible
 ``` Voici comment rendre un média qui est sous statut 'Nouveau' à 'Disponible' ```
 ### Description
 ``
