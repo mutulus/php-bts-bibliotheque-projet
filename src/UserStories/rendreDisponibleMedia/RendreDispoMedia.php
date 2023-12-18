@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UserStories\rendreDisponibleMedia;
+namespace App\UserStories\RendreDisponibleMedia;
 
 use App\entity\Media;
 use App\entity\StatutMedia;

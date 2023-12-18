@@ -2,16 +2,29 @@
 
 namespace App\entity;
 
-use app\Media;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+
+#[Entity]
 class Emprunt
 {
-    private int $id;
+    #[id]
+    #[Column(type: "string",length: 12)]
+    private string $numeroEmprunt;
+    #[Column(type: "datetime")]
     private \DateTime $dateEmprunt;
+    #[Column(type: "datetime")]
     private \DateTime $dateRetourEstimee;
-    private \DateTime $dateRetour;
-    private Media $mediaEmprunte;
-    private Adherent $emprunteur;
+    #[Column(type: "datetime",nullable: true)]
+    private ?\DateTime $dateRetour=null;
+    #[ManyToOne(targetEntity: Adherent::class)]
+    private Adherent $adherent;
+    #[ManyToOne(targetEntity: \App\entity\Media::class)]
+    private \App\entity\Media $media;
 
     public function __construct()
     {
@@ -61,22 +74,27 @@ class Emprunt
 
     public function getMediaEmprunte(): Media
     {
-        return $this->mediaEmprunte;
+        return $this->media;
     }
 
     public function setMediaEmprunte(Media $mediaEmprunte): void
     {
-        $this->mediaEmprunte = $mediaEmprunte;
+        $this->media = $mediaEmprunte;
     }
 
-    public function getEmprunteur(): Adherent
+    public function getAdherent(): Adherent
     {
-        return $this->emprunteur;
+        return $this->adherent;
     }
 
-    public function setEmprunteur(Adherent $emprunteur): void
+    public function setAdherent(Adherent $emprunteur): void
     {
-        $this->emprunteur = $emprunteur;
+        $this->adherent = $emprunteur;
+    }
+
+    public function setNumeroEmprunt(string $numeroEmprunt): void
+    {
+        $this->numeroEmprunt = $numeroEmprunt;
     }
 
 

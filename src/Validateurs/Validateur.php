@@ -69,5 +69,14 @@ class Validateur
         }
         return false;
     }
+    public function adherentExistePas(EntityManager $entityManager,int $idAdherent):bool
+    {
+        $repository=$entityManager->getRepository(Adherent::class);
+        $adherent=$repository->find($idAdherent);
+        if (empty($adherent)){
+            throw new \Exception("L'adhérent n'existe pas");
+        }
+        return false;
+    }
 
 }
