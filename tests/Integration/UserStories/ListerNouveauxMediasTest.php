@@ -101,7 +101,6 @@ class ListerNouveauxMediasTest extends TestCase
         $this->assertNotEquals("Nouveau",$statut);
     }
 
-    // Tester si l'ordre des médias récupérés est bien decroissant
 
 
 }

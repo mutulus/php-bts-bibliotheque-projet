@@ -27,13 +27,14 @@ class RendreDispoMedia
     {
         $repository=$this->entityManager->getRepository(Media::class);
         $media=$repository->find($idMedia);
+
         // Test si le média existe bien
         $this->validateurBDD->mediaExistePas($this->entityManager,$idMedia);
         // Test si le média est a bien comme statut 'Nouveau'
         $this->validateurBDD->mediaPasNouveau($this->entityManager,$idMedia);
         $media->setStatut(StatutMedia::DISPONIBLE);
         $this->entityManager->flush();
-
+        return true;
     }
 
 }
