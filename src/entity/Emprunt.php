@@ -42,7 +42,7 @@ class Emprunt
     public function setDateEmprunt(\DateTime $dateEmprunt): void
     {
 
-        $this->dateEmprunt = $date;
+        $this->dateEmprunt = $dateEmprunt;
     }
 
     public function setDateRetourEstimee(\DateTime $dateRetourEstimee): void

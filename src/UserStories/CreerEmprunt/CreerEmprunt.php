@@ -31,8 +31,9 @@ class CreerEmprunt
     {
         $emprunt=new Emprunt();
         // Vérifications
-        $this->validateurBDD->adhesionPasValable($this->entityManager,$idAdherent);
+
         $this->validateurBDD->adherentExistePas($this->entityManager, $idAdherent);
+        $this->validateurBDD->adhesionPasValable($this->entityManager,$idAdherent);
         $this->validateurBDD->mediaExistePas($this->entityManager, $idMedia);
         $this->validateurBDD->mediaPasDisponible($this->entityManager,$idMedia);
 
@@ -41,7 +42,8 @@ class CreerEmprunt
         $media->setStatut(StatutMedia::EMPRUNTE);
         $emprunt->setNumeroEmprunt($this->numeroEmprunt->generer());
         // Date emprunt générée automatiquement
-        $emprunt->setDateEmprunt(new \DateTime());
+        $date=new \DateTime();
+        $emprunt->setDateEmprunt($date);
         $emprunt->setAdherent($adherent);
         $emprunt->setMediaEmprunte($media);
         $dateRetour=new \DateTime();

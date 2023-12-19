@@ -29,6 +29,10 @@ class Adherent
     {
     }
 
+    public function getId():int
+    {
+        return $this->id;
+    }
     public function getNumeroAdherent(): string
     {
         return $this->numeroAdherent;
