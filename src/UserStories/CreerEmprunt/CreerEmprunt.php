@@ -27,17 +27,18 @@ class CreerEmprunt
         $this->numeroEmprunt=$numeroEmprunt;
     }
 
-    public function execute(int $idMedia, int $idAdherent)
+    public function execute(int $idMedia, string $numAdherent)
     {
         $emprunt=new Emprunt();
         // Vérifications
 
-        $this->validateurBDD->adherentExistePas($this->entityManager, $idAdherent);
-        $this->validateurBDD->adhesionPasValable($this->entityManager,$idAdherent);
+        $this->validateurBDD->adherentExistePas($this->entityManager, $numAdherent);
+        $this->validateurBDD->adhesionPasValable($this->entityManager,$numAdherent);
         $this->validateurBDD->mediaExistePas($this->entityManager, $idMedia);
         $this->validateurBDD->mediaPasDisponible($this->entityManager,$idMedia);
 
-        $adherent=$this->entityManager->find(Adherent::class,$idAdherent);
+        $repositoryAd=$this->entityManager->getRepository(Adherent::class);
+        $adherent=$repositoryAd->findOneBy(['numeroAdherent'=>$numAdherent]);
         $media=$this->entityManager->find(Media::class,$idMedia);
         $media->setStatut(StatutMedia::EMPRUNTE);
         $emprunt->setNumeroEmprunt($this->numeroEmprunt->generer());

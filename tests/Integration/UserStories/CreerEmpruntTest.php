@@ -81,7 +81,7 @@ class CreerEmpruntTest extends TestCase
 
         $creerEmprunt=new CreerEmprunt($this->entityManager,$this->validateurBDD,$this->generateurNumeroEmprunt);
         // Act
-        $emprunt=$creerEmprunt->execute($livre->getId(),$adherent->getId());
+        $emprunt=$creerEmprunt->execute($livre->getId(),$adherent->getNumeroAdherent());
         //Assert
         $this->assertTrue($emprunt);
 
@@ -101,7 +101,7 @@ class CreerEmpruntTest extends TestCase
         $creerEmprunt=new CreerEmprunt($this->entityManager,$this->validateurBDD,$this->generateurNumeroEmprunt);
         // Act Assert
         $this->expectException(\Exception::class);
-        $emprunt=$creerEmprunt->execute(0,$adherent->getId());
+        $emprunt=$creerEmprunt->execute(0,$adherent->getNumeroAdherent());
 
 
 
@@ -125,7 +125,7 @@ class CreerEmpruntTest extends TestCase
         $creerEmprunt=new CreerEmprunt($this->entityManager,$this->validateurBDD,$this->generateurNumeroEmprunt);
         // Act  Assert
         $this->expectException(\Exception::class);
-        $emprunt=$creerEmprunt->execute($livre->getId(),10);
+        $emprunt=$creerEmprunt->execute($livre->getId(),'AD-177817');
 
 
     }
@@ -153,13 +153,8 @@ class CreerEmpruntTest extends TestCase
         $creerEmprunt=new CreerEmprunt($this->entityManager,$this->validateurBDD,$this->generateurNumeroEmprunt);
         // Act Assert
         $this->expectException(\Exception::class);
-        $emprunt=$creerEmprunt->execute($livre->getId(),$adherent->getId());
+        $emprunt=$creerEmprunt->execute($livre->getId(),$adherent->getNumeroAdherent());
 
-
-
-
-
-        $repository=$this->entityManager->getRepository(Emprunt::class);
 
 
     }

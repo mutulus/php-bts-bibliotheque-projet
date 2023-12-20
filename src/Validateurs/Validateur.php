@@ -77,10 +77,10 @@ class Validateur
         return false;
     }
 
-    public function adherentExistePas(EntityManager $entityManager, int $idAdherent): bool
+    public function adherentExistePas(EntityManager $entityManager, string $numAdherent): bool
     {
         $repository = $entityManager->getRepository(Adherent::class);
-        $adherent = $repository->find($idAdherent);
+        $adherent = $repository->findOneBy(['numeroAdherent'=>$numAdherent]);
         if (empty($adherent)) {
             throw new \Exception("L'adhérent n'existe pas");
         }
@@ -97,10 +97,10 @@ class Validateur
         return false;
     }
 
-    public function adhesionPasValable(EntityManager $entityManager, int $idAdherent): bool
+    public function adhesionPasValable(EntityManager $entityManager, string $numAdherent): bool
     {
         $repository=$entityManager->getRepository(Adherent::class);
-        $adherent=$repository->find($idAdherent);
+        $adherent=$repository->findOneBy(['numeroAdherent'=>$numAdherent]);
         if (empty($adherent->getDateAdhesion())){
             throw new \Exception("L'adhésion de l'adhérent n'est plus valable");
         }

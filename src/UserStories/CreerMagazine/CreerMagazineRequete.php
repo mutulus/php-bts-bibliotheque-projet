@@ -9,18 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CreerMagazineRequete
 {
-    /**
-     * Déclaration du titre du magazine
-     * @var string
-     */
+
     #[Assert\NotBlank(
         message: 'Le titre est obligatoire'
     )]
     public string $titre;
-    /**
-     * Déclaration du titre du magazine
-     * @var int
-     */
+    #[Assert\GreaterThan(0,message: 'Le numéro de magazine doit être supérieur à 0')]
     #[Assert\NotBlank(
         message: 'Le numero de magazine est obligatoire'
     )]
@@ -29,7 +23,9 @@ class CreerMagazineRequete
     #[Assert\NotBlank(
         message: 'La date de publication est obligatoire'
 )]
-    #[Assert\DateTime]
+    #[Assert\NotBlank(
+        message: 'La date de publication doit être renseignée'
+    )]
     public \DateTime $datePublication;
 
     /**

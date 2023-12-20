@@ -76,6 +76,7 @@ class CreerMagazine
 
         }
         $errors=[];
+
         foreach ($erreurs as $erreur){
             $errors[]=$erreur->getMessage();
         }

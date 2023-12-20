@@ -121,9 +121,15 @@ $app->command('creerEmprunt',function (SymfonyStyle $io)use($entityManager){
     $creerEmprunt=new \App\UserStories\CreerEmprunt\CreerEmprunt($entityManager,new Validateur(),new \App\Services\GenerateurNumeroEmprunt());
     $io->title('Créer un emprunt');
     $idMedia=$io->ask("Saisir l'id du média à emprunter");
-    $idAdherent=$io->ask("Saisir l'id de l'adhérent qui va emprunter");
-    $creerEmprunt->execute($idMedia,$idAdherent);
-    $io->success("L'emprunt a bien été inséré dans la base de données");
+    $numAdherent=$io->ask("Saisir le numéro de l'adhérent qui va emprunter");
+    try {
+        $creerEmprunt->execute($idMedia,$numAdherent);
+    }catch (Exception $e){}
+    if (isset($e)){
+        $io->error(explode("SE",$e->getMessage()));
+    }else {
+        $io->success("Un magazine a bien été inséré dans la base de données");
+    }
 
 });
 
