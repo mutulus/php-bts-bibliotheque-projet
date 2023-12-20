@@ -5,8 +5,6 @@ use App\Validateurs\Validateur;
 
 require_once "bootstrap.php";
 $validateurBDD=new Validateur();
-$generateur=new \App\Services\GenerateurNumeroEmprunt();
-$creerEmprunt=new \App\UserStories\CreerEmprunt\CreerEmprunt($entityManager,$validateurBDD,$generateur);
-$creerEmprunt->execute(1,1);
-
+$retournerEmprunt=new \App\UserStories\RetournerEmprunt\RetournerEmprunt($entityManager,$validateurBDD);
+$retournerEmprunt->execute("EM-050057");
 

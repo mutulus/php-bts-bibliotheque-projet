@@ -132,6 +132,20 @@ $app->command('creerEmprunt',function (SymfonyStyle $io)use($entityManager){
     }
 
 });
+$app->command('restituerEmprunt',function (SymfonyStyle $io)use($entityManager){
+    $restituerEmprunt=new \App\UserStories\RetournerEmprunt\RetournerEmprunt($entityManager,new Validateur());
+    $io->title('Restituer un emprunt');
+    $numEmprunt=$io->ask("Saisir le numéro d'emprunt à restituer");
+    try {
+        $restituerEmprunt->execute($numEmprunt);
+    }catch (Exception $e){}
+    if (isset($e)){
+        $io->error(explode("SE",$e->getMessage()));
+    }else {
+        $io->success("L'emprunt numéro $numEmprunt a bien été restitué");
+    }
+
+});
 
 $app->run();
 

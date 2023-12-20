@@ -39,6 +39,7 @@ class Emprunt
         }
     }
 
+
     public function setDateEmprunt(\DateTime $dateEmprunt): void
     {
 
@@ -67,9 +68,9 @@ class Emprunt
         return $this->dateRetour;
     }
 
-    public function setDateRetour(string $dateRetour): void
+    public function setDateRetour(\DateTime $dateRetour): void
     {
-        $this->dateRetour = \DateTime::createFromFormat("d/m/Y",$dateRetour);
+        $this->dateRetour = $dateRetour;
     }
 
     public function getMediaEmprunte(): Media

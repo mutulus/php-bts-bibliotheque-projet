@@ -106,6 +106,14 @@ class Validateur
         }
         return false;
     }
+    public function numEmpruntExistant(EntityManager $entityManager,string $numEmprunt):bool
+    {
+        $repo =$entityManager->getRepository(Emprunt::class);
+        if (empty($repo->findOneBy(['numeroEmprunt'=>$numEmprunt]))){
+            throw new \Exception("Ce numéro d'emprunt n'éxiste pas");
+        }
+        return true;
+}
 
 
 }
