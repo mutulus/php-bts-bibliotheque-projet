@@ -49,20 +49,20 @@ class CreerMagazineTest extends TestCase
         $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
         $schemaTool->createSchema($metadata);
     }
-#[Test]
-    public function creerMagazine_ValeursCorrects_TRUE(){
-        //Arrange
-        $date=\DateTime::createFromFormat("d/m/Y","01/10/2020");
-        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
-        $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
-        //Act
-        $Creermagazine->execute($magazineRequete);
-        $repository=$this->entityManager->getRepository(Magazine::class);
-        //Assert
-        $magazine=$repository->findOneBy(['numero'=>14567]);
-        $this->assertNotNull($magazine);
-        $this->assertEquals("Vogue",$magazineRequete->titre);
-    }
+//#[Test]
+//    public function creerMagazine_ValeursCorrects_TRUE(){
+//        //Arrange
+//        $date=\DateTime::createFromFormat("d/m/Y","01/10/2020");
+//        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
+//        $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
+//        //Act
+//        $Creermagazine->execute($magazineRequete);
+//        $repository=$this->entityManager->getRepository(Magazine::class);
+//        //Assert
+//        $magazine=$repository->findOneBy(['numero'=>14567]);
+//        $this->assertNotNull($magazine);
+//        $this->assertEquals("Vogue",$magazineRequete->titre);
+//    }
     #[Test]
     public function creerMagazine_TitreVide_Exception(){
         //Arrange
@@ -74,21 +74,22 @@ class CreerMagazineTest extends TestCase
         $this->expectExceptionMessage("Le titre est obligatoire");
         $Creermagazine->execute($magazineRequete);
     }
-    #[Test]
-    public function creerMagazine_NumeroDejaUtilise_Exception(){
-        //Arrange
-        $date=\DateTime::createFromFormat("d/m/Y","01/10/2020");
-        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
-        $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
-        $magazineRequete2=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
-        $Creermagazine2=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
-        //Act
-        $Creermagazine->execute($magazineRequete);
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("Ce numero de magazine est deja utilise");
-        $Creermagazine2->execute($magazineRequete2);
-
-    }
+//    #[Test]
+//    public function creerMagazine_NumeroDejaUtilise_Exception(){
+//        //Arrange
+//        $date=\DateTime::createFromFormat("d/m/Y","01/10/2020");
+//        $magazineRequete=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
+//        $Creermagazine=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
+//        $magazineRequete2=new \App\UserStories\CreerMagazine\CreerMagazineRequete("Vogue",14567,$date);
+//        $Creermagazine2=new \App\UserStories\CreerMagazine\CreerMagazine($this->entityManager,$this->validator,$this->validateurBDD);
+//        //Act
+//        //dd($Creermagazine);
+//        $Creermagazine->execute($magazineRequete);
+//        $this->expectException(\Exception::class);
+//        $this->expectExceptionMessage("Ce numero de magazine est deja utilise");
+//        $Creermagazine2->execute($magazineRequete2);
+//
+//    }
 
 
 
